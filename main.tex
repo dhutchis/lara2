@@ -1,0 +1,611 @@
+% This is "sig-alternate.tex" V2.1 April 2013
+% This file should be compiled with V2.5 of "sig-alternate.cls" May 2012
+%
+% This example file demonstrates the use of the 'sig-alternate.cls'
+% V2.5 LaTeX2e document class file. It is for those submitting
+% articles to ACM Conference Proceedings WHO DO NOT WISH TO
+% STRICTLY ADHERE TO THE SIGS (PUBS-BOARD-ENDORSED) STYLE.
+% The 'sig-alternate.cls' file will produce a similar-looking,
+% albeit, 'tighter' paper resulting in, invariably, fewer pages.
+%
+% ----------------------------------------------------------------------------------------------------------------
+% This .tex file (and associated .cls V2.5) produces:
+%       1) The Permission Statement
+%       2) The Conference (location) Info information
+%       3) The Copyright Line with ACM data
+%       4) NO page numbers
+%
+% as against the acm_proc_article-sp.cls file which
+% DOES NOT produce 1) thru' 3) above.
+%
+% Using 'sig-alternate.cls' you have control, however, from within
+% the source .tex file, over both the CopyrightYear
+% (defaulted to 200X) and the ACM Copyright Data
+% (defaulted to X-XXXXX-XX-X/XX/XX).
+% e.g.
+% \CopyrightYear{2007} will cause 2007 to appear in the copyright line.
+% \crdata{0-12345-67-8/90/12} will cause 0-12345-67-8/90/12 to appear in the copyright line.
+%
+% ---------------------------------------------------------------------------------------------------------------
+% This .tex source is an example which *does* use
+% the .bib file (from which the .bbl file % is produced).
+% REMEMBER HOWEVER: After having produced the .bbl file,
+% and prior to final submission, you *NEED* to 'insert'
+% your .bbl file into your source .tex file so as to provide
+% ONE 'self-contained' source file.
+%
+% ================= IF YOU HAVE QUESTIONS =======================
+% Questions regarding the SIGS styles, SIGS policies and
+% procedures, Conferences etc. should be sent to
+% Adrienne Griscti (griscti@acm.org)
+%
+% Technical questions _only_ to
+% Gerald Murray (murray@hq.acm.org)
+% ===============================================================
+%
+% For tracking purposes - this is V2.0 - May 2012
+
+%\documentclass{sig-alternate-05-2015}
+\documentclass{sig-alternate} %[conference]{IEEEtran}
+
+\setlength{\paperheight}{11in}
+
+\newcommand{\lara}{\textsc{Lara}}%
+\newcommand{\laradb}{\textsc{LaraDB}}%
+\newcommand{\plara}{\textsc{PLara}}%
+\newcommand{\matlab}{MATLAB}%
+\usepackage{ mathdots }
+
+\usepackage[dvipsnames,table]{xcolor}
+\usepackage{bm}
+\usepackage{amsmath}
+% \usepackage{amsfonts}
+\usepackage{amssymb}
+% \let\proof\undefined
+% \usepackage{amsthm}
+\usepackage{amscd}
+\usepackage{mathpartir}
+
+\usepackage{subfig}
+\usepackage{adjustbox}
+\usepackage{calc}
+\usepackage{color}
+\usepackage{varwidth}
+\usepackage{multirow}
+% \usepackage{xfrac}
+
+% \theoremstyle{definition}
+% \newtheorem{definition}{Definition}[section]
+
+\newlength{\centersep}
+\setlength{\centersep}{-.5em}
+
+\usepackage{relsize}
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\xmark}{\ding{55}}%
+
+\newcommand{\newcomment}[3]{%
+  \expandafter\newcommand\csname #1\endcsname[1]{{\color{#2}{[#3: ##1]}}}%
+}
+\newcomment{bill}{blue}{Bill}
+
+% outer joins
+\def\ojoin{\setbox0=\hbox{$\bowtie$}%
+  \rule[-.02ex]{.25em}{.4pt}\llap{\rule[\ht0]{.25em}{.4pt}}}
+\def\leftouterjoin{\mathbin{\ojoin\mkern-5.8mu\bowtie}}
+\def\rightouterjoin{\mathbin{\bowtie\mkern-5.8mu\ojoin}}
+\def\fullouterjoin{\mathbin{\ojoin\mkern-5.8mu\bowtie\mkern-5.8mu\ojoin}}
+
+\usepackage{ wasysym }
+\newcommand{\mxz}{{\,\oplus.\oland\,}}
+\newcommand{\cxm}{{\,\omid.\otimes\,}}
+\newcommand{\oxm}[1][]{{\,\fullmoon_{#1}.\otimes\,}}
+% \newcommand{\join}{\bowtie}
+% \newcommand{\sjoin}{\hat{\join}}
+\newcommand\uproduct{%
+  \mathchoice{\mathbin{\;\rotatebox{90}{$\Bowtie$}}}%
+             {\mathbin{\;\rotatebox{90}{$\Bowtie$}}}%
+             {\mathbin{\;\rotatebox{90}{\scalebox{0.65}{$\Bowtie$}}}}%
+             {\mathbin{\;\rotatebox{90}{\scalebox{0.65}{$\Bowtie$}}}}%
+}
+
+\newcommand{\collen}{238}
+\newcommand{\bif}{\text{ if }}
+\newcommand{\bthen}{\text{ then }}
+\newcommand{\belse}{\text{ else }}
+\newcommand{\botherwise}{\text{ otherwise }}
+\newcommand{\temperature}{temp}
+\newcommand{\humidity}{hum}
+\newcommand{\myfighsep}{$\quad$}
+\newcommand{\overbar}[1]{\mkern 1.5mu\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}
+\newcommand{\tup}[1]{\overbar{#1}}
+\newcommand{\ex}[0]{\mathbb{E}}
+\newcommand{\bone}[0]{\mathbf{1}}
+\newcommand{\bzero}[0]{\mathbf{0}}
+\newcommand{\bbot}{} % 
+
+\newcommand{\bb}[1]{\textsc{#1}}
+\newcommand{\bsort}[0]{\textbf{S{\scriptsize ORT}}}
+\newcommand{\bext}{\bb{Ext}}
+\newcommand{\bmap}{\bb{Map}}
+\newcommand{\bby}{\bb{by}}
+\newcommand{\bon}{\bb{on}}
+\newcommand{\bto}{\bb{to}}
+\newcommand{\bfrom}{\bb{from}}
+\newcommand{\bjoin}{\bb{Join}}
+\newcommand{\bunion}{\bb{Union}}
+\newcommand{\bagg}{\bb{Agg}}
+\newcommand{\bselect}{\bb{select}}
+\newcommand{\bas}{\bb{as}}
+\newcommand{\bgroupby}{\bb{group by}}
+\newcommand{\brename}{\bb{Rename}}
+\newcommand{\bmergejoin}{\bb{MergeJoin}}
+\newcommand{\bmergeunion}{\bb{MergeUnion}}
+\newcommand{\bmergeagg}{\bb{MergeAgg}}
+\newcommand{\bsortagg}{\textbf{S{\scriptsize ORT}A{\scriptsize GG}}}
+\newcommand{\bapply}{\bb{Map}}
+\newcommand{\bapplyext}{\bb{Ext}}
+\newcommand{\bwhere}{\bb{where}}
+\newcommand{\bload}{\bb{Load}}
+\newcommand{\bstore}{\bb{Store}}
+\newcommand{\bover}{\bb{over}}
+\newcommand{\bnull}{\bb{null}}
+
+\usepackage{xparse}
+\DeclareDocumentCommand{\join}{ O{} O{} }{\operatorname{\bowtie_{#1}^{#2}}\!}
+\newcommand{\joino}[1][]{\join[\otimes][#1]}
+\newcommand{\joinp}[1][]{\join[\otimes][#1]} %\odot
+\newcommand{\joinotup}[1][]{\join[\tup{\otimes}][#1]}
+\DeclareDocumentCommand{\sjoin}{ O{} O{} }{\operatorname{\hat{\bowtie}_{#1^{#2}}}}
+\newcommand{\sjoino}[1][]{\sjoin[\otimes][#1]}
+\newcommand{\sjoinotup}[1][]{\sjoin[\tup{\otimes}][#1]}
+\DeclareDocumentCommand{\union}{ O{} O{} }{\operatorname{\uproduct_{#1}^{#2}}\!}
+\newcommand{\uniono}[1][]{\union[\oplus][#1]} %\operatorname{\uproduct_\oplus^{#1}}
+\newcommand{\unionp}[1][]{\union[+][#1]} %\operatorname{\uproduct_\oplus^{#1}}
+\newcommand{\unionotup}[1][]{\union[\tup{\oplus}][#1]} %\operatorname{\uproduct_\tup{\oplus}^{#1}}
+\newcommand{\tupotimes}[1][]{\operatorname{\tup{\otimes}}^{#1}}
+\newcommand{\tupoplus}[1][]{\operatorname{\tup{\oplus}}^{#1}}
+\DeclareMathOperator{\ext}{ext}
+\DeclareMathOperator{\avg}{avg}
+\DeclareMathOperator{\coarsen}{coarsen}
+\DeclareMathOperator{\reduce}{reduce}
+\DeclareMathOperator{\map}{map}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\trace}{tr}
+\DeclareMathOperator*{\tupbigoplus}{\tup{\bigoplus}}
+\DeclareMathOperator*{\tupbigotimes}{\tup{\bigotimes}}
+
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+\DeclarePairedDelimiter{\paren}{(}{)}
+
+\newcommand{\lrparen}[1]{% \llrrparen{..}
+  \left(#1\right)}
+\newcommand{\lrbracket}[1]{% \lrbracket{..}
+  \left[#1\right]}
+\newcommand{\lrceil}[1]{% \lrbracket{..}
+  \left\lceil#1\right\rceil}
+\newcommand{\llrrbracket}[1]{% \llrrbracket{..}
+  \left[\mkern-3mu\left[#1\right]\mkern-3mu\right]}
+\newcommand{\llrrparen}[1]{% \llrrparen{..}
+  \left(\mkern-6mu\left(#1\right)\mkern-6mu\right)}
+
+\newcommand{\dylan}[1]{\textcolor{teal}{{\bf DH:} #1}}
+\newcommand{\tr}[0]{{\intercal}}
+\newcommand{\col}[0]{\colon\!}
+\newcommand{\matr}[1]{\mathbf{#1}} % undergraduate algebra version
+\newcommand{\mxm}{{\,\oplus.\otimes\,}}
+% to allow [H] for algorithms
+% https://tex.stackexchange.com/questions/82271/multiple-algorithm2e-algorithms-in-two-column-documents/82272#82272
+\makeatletter
+\newcommand{\removelatexerror}{\let\@latex@error\@gobble}
+\makeatother
+% vspace above and below inline algorithms
+\newlength{\algspace}
+\setlength{\algspace}{3pt}
+\usepackage[]{algorithm2e}
+
+
+\usepackage[  
+  bookmarks=false,
+  hyperfootnotes=false,
+  hyperindex=false,
+  %pdfpagemode=UseNone,
+  %bookmarksopen=false,
+  hidelinks,   
+%  pagebackref=true,
+    pdftitle={New Lara: A Minimalist Kernel for Linear and Relational Algebra Computation},  
+  pdfauthor={Dylan Hutchison, Bill Howe, Dan Suciu},
+  pdfpagelabels=false]{hyperref}
+
+
+\def\sharedaffiliation{%
+\end{tabular}
+\begin{tabular}{c}}
+
+
+%% new command for indent for algorithm.
+\newlength\myindent
+\setlength\myindent{2em}
+\newcommand\bindent{%
+  \begingroup
+  \setlength{\itemindent}{\myindent}
+  \addtolength{\algorithmicindent}{\myindent}
+}
+\newcommand\eindent{\endgroup}
+
+\usepackage{todonotes}
+\newcommand{\todoi}[1]{\todo[inline]{#1}}
+
+\graphicspath{{.}{./figures/}}
+
+%\usepackage{dblfloatfix} %provides: \usepackage{fixltx2e}
+\usepackage{siunitx}
+\sisetup{round-precision=2,round-mode=places,scientific-notation=true}
+\usepackage{threeparttable}
+\usepackage{multirow}
+\usepackage{adjustbox}
+\usepackage{array}
+\newcolumntype{R}[2]{%
+    >{\adjustbox{angle=#1,lap=\width-(#2)}\bgroup}%
+    l%
+    <{\egroup}%
+}
+
+% biblatex redefines citeyear
+% make sure the ACM version is used
+% \let\citeyearold\citeyear
+% \let\citeyear\undefined 
+% \usepackage[style=trad-abbrv,backend=bibtex]{biblatex} % multiple .bib files
+% \addbibresource{header.bib}
+% \addbibresource{refs.bib}
+% \let\citeyear\citeyearold
+% \let\citeyearold\undefined
+
+
+
+\usepackage{listings}
+
+
+
+
+
+
+
+
+
+
+\begin{document}
+
+% Copyright
+% \setcopyright{acmcopyright}
+%\setcopyright{acmlicensed}
+\setcopyright{rightsretained}
+%\setcopyright{usgov}
+%\setcopyright{usgovmixed}
+%\setcopyright{cagov}
+%\setcopyright{cagovmixed}
+
+
+% DOI
+% \doi{10.475/123_4}
+
+% ISBN
+% \isbn{123-4567-24-567/08/06}
+
+%Conference
+% \conferenceinfo{EDBT}{March 21--24, 2017, Venice, Italy}
+% \acmPrice{\$15.00}
+
+%
+% --- Author Metadata here ---
+%\CopyrightYear{2007} % Allows default copyright year (20XX) to be over-ridden - IF NEED BE.
+%\crdata{0-12345-67-8/90/01}  % Allows default copyright data (0-89791-88-6/97/05) to be over-ridden - IF NEED BE.
+% --- End of Author Metadata ---
+
+
+\title{New Lara: A Minimalist Kernel for \\ Linear and Relational Algebra Computation}
+% \subtitle{[Extended Abstract]
+% \titlenote{A full version of this paper is available as
+% \textit{Author's Guide to Preparing ACM SIG Proceedings Using
+% \LaTeX$2_\epsilon$\ and BibTeX} at
+% \texttt{www.acm.org/eaddress.htm}}}
+
+\numberofauthors{1}
+\author{
+\alignauthor
+	Dylan Hutchison, Bill Howe, Dan Suciu\\[3pt]
+     \affaddr{\{dhutchis,billhowe,suciu\}@cs.washington.edu}%
+       % \affaddr{Department of Computer Science and Engineering}\\
+       % \affaddr{University of Washington}\\
+       % \affaddr{Seattle, WA 98195-2350, U.S.A.}
+% \begin{tabular}{c}
+% %\alignauthor
+% 	David Maier\\
+% 	\affaddr{maier@cs.washington.edu}\\
+%        \affaddr{Department of Computer Science}\\
+%        \affaddr{Portland State University}\\
+%        \affaddr{Portland, OR  97207-0751, U.S.A.}
+% \end{tabular}
+% 
+% \vspace{-20em}%
+}
+
+% RA and LA need to be used together
+% 
+
+\maketitle
+\begin{abstract}
+\lara{} is good! \lara{} is great!
+\end{abstract}
+% Some point about how this is more explicit than MapReduce (and, dare we say, lambda calculus)
+% while less explicit than either RA or LA. It's at just the right level of expressiveness.
+
+
+% NoSQL key-value databases emphasize record-level read-write operations, 
+% relying on external infrastructure such as Spark or MapReduce 
+% to implement complex analytics (e.g., matrix math, relational joins, machine learning). 
+% Computing in an external system is expensive for small yet complex analytics, 
+% requiring long code paths to extract data from the database and prepare native data structures.
+% In response, developers implement custom applications 
+% that push simple filters and sums into the database's scans
+% in order to maximize in-database processing.
+% Recent software generalized this approach 
+% to provide native, in-database support for complex analytics.
+
+% In this work we evaluate the performance of in-database vs. external system 
+% approaches to query processing for the Apache Accumulo NoSQL database.
+% Specifically we run Graphulo, a library for matrix math 
+% inside Accumulo's scan-time iterators, and MapReduce, 
+% an off-the-shelf external system commonly used with Accumulo,
+% on sparse matrix multiplication.
+% Results indicate that the Graphulo's in-database approach is superior at smaller problem sizes,
+% while at larger problem sizes the two approaches have similar performance.
+\section{Introduction}
+
+
+\begin{figure*}[t]
+% \begin{tabular}[t]{cc|c}
+%  % & & [$f(k_1,k_2)$] \\
+% $k_1$ & $k_2$ & $v$ \\
+% \hline
+% $a$ & $x$ & 2 \\
+% $c$ & $x$ & 3 \\
+% -- & -- & 0
+% \end{tabular}
+% $\;\join[+]\;$
+% \begin{tabular}[t]{c|c}
+% $k_1$ & $v$ \\
+% \hline
+% $a$ & 7 \\
+% $b$ & 1 \\
+% $c$ & 5 \\
+% --  & 0
+% \end{tabular}
+% $\;=\;$
+% \begin{tabular}[t]{cc|c}
+% $k_1$ & $k_2$ & $v$ \\
+% \hline
+% $a$ & $x$ & 9 \\
+% $a$ & -- & 7 \\
+% $b$ & -- & 2 \\
+% $c$ & $x$ & 8 \\
+% $c$ & -- & 3 \\
+% -- & -- & 0
+% \end{tabular}
+% \\
+
+% \begin{tabular}[t]{cc|c}
+% $k_1$ & $k_2$ & $v$ \\
+% \hline
+% $a$ & $x$ & 9 \\
+% $a$ & -- & 7 \\
+% $b$ & -- & 2 \\
+% $c$ & $x$ & 8 \\
+% $c$ & -- & 3 \\
+% -- & -- & 0
+% \end{tabular}
+% $\;\union[+]\;$
+% \begin{tabular}[t]{c|c}
+% $k_1$ & $v$ \\
+% \hline
+% -- & 0
+% \end{tabular}
+% $\;=\;$
+% \begin{tabular}[t]{c|r}
+% $k_1$ & $v$ \\
+% \hline
+% $a$ & 9 + $\lim 7 + \lim 0 = 9 + \infty + 0 = \infty$ \\
+% $b$ & $\lim 2 + \lim 0 = \infty + 0 = \infty$ \\
+% $c$ & 8 + $\lim 3 + \lim 0 = 8 + \infty + 0 = \infty$ \\
+% -- & $\lim 0 = 0$ \\
+% \end{tabular}
+% \\
+
+% \begin{tabular}[t]{cc|l}
+% $k_1$ & $k_2$ & $v$ \\
+% \hline
+% $a$ & $x$ & 9 \\
+% $a$ & -- & 7 \\
+% $b$ & -- & 2 \\
+% $c$ & $x$ & 8 \\
+% $c$ & -- & 3 \\
+% -- & -- & 0
+% \end{tabular}
+% $\;\union[+]\;$
+% \begin{tabular}[t]{c|c}
+% $k_2$ & $v$ \\
+% \hline
+% -- & 0
+% \end{tabular}
+% $\;=\;$
+% \begin{tabular}[t]{c|r}
+% $k_2$ & $v$ \\
+% \hline
+% $x$ & 9 + $8 + 2 + \lim 0 + \lim 0 = 19 + 0 + 0 = 19$ \\
+% -- & $7 + 2 + 3 + \lim 0 + \lim 0 = 12 + 0 + 0 = 12$ \\
+% \end{tabular}
+
+% \[ \lim x = \begin{cases} \infty, &x>0 \\ -\infty, &x<0 \\ 0, &x=0 \end{cases} \]
+
+% \begin{align*}
+% A \join[\odot] B &= \ext_{\text{\begin{tabular}{c|c}$k_B$ & $v$ \\ \hline -- & $v$\end{tabular}}} (A) 
+% \odot \ext_{\text{\begin{tabular}{c|c}$k_A$ & $v$ \\ \hline -- & $v$\end{tabular}}} (B) \\
+% A \union[\odot] B &= \gamma^{k_A \cap k_B}_{\odot} (A) \odot \gamma^{k_A \cap k_B}_{\odot} (B)
+% \end{align*}
+
+Core operations:
+\begin{enumerate}\itemsep0pt
+\item \bext{} $A$ \bby{} $f$
+\item \bagg{} $A$ [\bon{} $\tup{k}$] \bby{} $\oplus$ \textsc{limit} $lim$
+\item \textsc{Combine} $A, B, \dots$ \bby{} $\odot$
+\end{enumerate}
+Derived operations:
+\begin{enumerate}\itemsep0pt
+\item \bmap{} $A$ \bby{} $f$
+\item \bext{} $A$ \textsc{with} $\tup{k}$ = \bext{} $A$ \bby{} \begin{tabular}{c|c}$\tup{k}$ & $\tup{v}$ \\ \hline -- & $\tup{v}$\end{tabular} (add blank keys $\tup{k}$)
+\item \brename{} $A$ \bfrom{} $x$ \bto{} $y$ = $\dots$
+\item \bjoin{} $A, B$ \bby{} $\odot$ = \textsc{Combine} (\bext{} $A$ \textsc{with} $\tup{k}_B$), (\bext{} $B$ \textsc{with} $\tup{k}_A$) \bby{} $\odot$
+\end{enumerate}
+Physical \lara{}:
+\begin{enumerate}\itemsep0pt
+\item \bsort{} $A$ \bon{} $\tup{k}$
+\item \bagg{} $A$ [\bon{} $\tup{k}$] \bby{} $\oplus$ \textsc{limit} $lim$
+\item \bsortagg{} $A$ \bon{} $\tup{k}$ \bby{} $\oplus$ \textsc{limit} $lim$
+\item \textsc{Merge} $A,B,\dots$ \bby{} $\odot$
+\end{enumerate}
+
+
+\begin{tabular}{c|cccc}
+  &   & x & y &   \\
+\hline
+a & 0 & 2 & 3 & 0 \\
+b & 0 & 4 & 0 & 0 \\
+  & 0 & 0 & 0 & 0
+\end{tabular}
++
+10 =
+\begin{tabular}{c|cccc}
+  &   & x & y &   \\
+\hline
+a & 10 & 12 & 13 & 10 \\
+b & 10 & 14 & 10 & 10 \\
+  & 10 & 10 & 10 & 10
+\end{tabular}
+
+\begin{tabular}{c|cccc}
+  &   & x & y &   \\
+\hline
+a & 0 & 2 & 3 & 0 \\
+b & 0 & 4 & 0 & 0 \\
+  & 0 & 0 & 0 & 0
+\end{tabular}
++
+\begin{tabular}{c|cccc}
+  &   & x & y &   \\
+\hline
+a & 10 & 10 & 10 & 10 \\
+b & 10 & 10 & 10 & 10 \\
+  & 10 & 10 & 10 & 10
+\end{tabular}
+=
+\begin{tabular}{c|cccc}
+  &   & x & y &   \\
+\hline
+a & 10 & 12 & 13 & 10 \\
+b & 10 & 14 & 10 & 10 \\
+  & 10 & 10 & 10 & 10
+\end{tabular}
+
+\begin{tabular}{c|cccc}
+  &   & x & y &   \\
+\hline
+a & 0 & 2 & 3 & 0 \\
+b & 0 & 4 & 0 & 0 \\
+  & 0 & 0 & 0 & 0 \\
+  & 0 & 0 & 0 & 0 \\
+\end{tabular}
++
+\begin{tabular}{c|c}
+  &   \\
+a & 10 \\
+  & 0  \\
+c & 12 \\
+  & 0  \\
+\end{tabular}
+=
+\begin{tabular}{c|cccc}
+  &   & x & y &   \\
+\hline
+a & 10 & 12 & 13 & 10 \\
+b & 0 & 4 & 0 & 0 \\
+c & 12 & 12 & 12 & 12 \\
+ & 0 & 0 & 0 & 0 \\
+\end{tabular}
+
+\begin{tabular}{c|cccc}
+  &   & x & y &   \\
+\hline
+a & 0 & 2 & 3 & 0 \\
+b & 0 & 4 & 0 & 0 \\
+  & 0 & 0 & 0 & 0 \\
+  & 0 & 0 & 0 & 0 \\
+\end{tabular}
++
+\begin{tabular}{c|cccc}
+  &   &  &  &   \\
+\hline
+a & 10 & 10 & 10 & 10 \\
+  & 0 & 0 & 0 & 0 \\
+c & 12 & 12 & 12 & 12 \\
+  & 0 & 0 & 0 & 0 \\
+\end{tabular}
+=
+\begin{tabular}{c|cccc}
+  &   & x & y &   \\
+\hline
+a & 10 & 12 & 13 & 10 \\
+b & 0 & 4 & 0 & 0 \\
+c & 12 & 12 & 12 & 12 \\
+ & 0 & 0 & 0 & 0 \\
+\end{tabular}
+
+
+$\forall k, k',\; f(k,0)(k') = 0'$ 
+
+% \begin{tabular}{c|ccccc}
+% &$\dots$&$\dots$&$x$&$\dots$&$\dots$\\
+% \hline
+% $\vdots$ & $\ddots$ & $\vdots$ & $\vdots$ & $\vdots$ & $\iddots$ \\
+% $\vdots$ & $\dots$ & 2 & 2 & 2 &  $\dots$ \\
+% $a$ & $\dots$ & 2 & 5 & 2 &  $\dots$ \\
+% $\vdots$ & $\dots$ & 2 & 2 & 2 &  $\dots$ \\
+% $\vdots$ & $\iddots$ & $\vdots$ & $\vdots$ & $\vdots$ & $\ddots$ \\
+% \end{tabular}
+\end{figure*}
+
+\section*{Acknowledgments}
+{\footnotesize This material is based upon work supported by the NSF Graduate
+Research Fellowship under Grant No. DGE-1256082.}
+% Opinions, findings, and
+% conclusions or recommendations expressed in this material are those of the author and do not
+% necessarily reflect the views of the National Science Foundation.
+
+%
+% The following two commands are all you need in the
+% initial runs of your .tex file to
+% produce the bibliography for the citations in your paper. 
+% \renewcommand*{\bibfont}{\footnotesize}
+\nocite{hutchison2016lara}
+\bibliographystyle{abbrv}
+{\small 
+\bibliography{header,refs}
+}
+%\bibliographystyle{abbrv}
+%\printbibliography{}
+%
+% ACM needs 'a single self-contained file'!
+%
+%\balancecolumns % GM June 2007
+\end{document}
